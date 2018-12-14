@@ -1,15 +1,11 @@
 # tslint-loader
-[![Build Status](https://travis-ci.org/wbuchwalter/tslint-loader.svg?branch=master)](https://travis-ci.org/wbuchwalter/tslint-loader)
-[![Dependency Status](https://david-dm.org/wbuchwalter/tslint-loader.svg)](https://david-dm.org/wbuchwalter/tslint-loader)
-[![devDependency Status](https://david-dm.org/wbuchwalter/tslint-loader/dev-status.svg)](https://david-dm.org/wbuchwalter/tslint-loader?type=dev)
-[![peerDependency Status](https://david-dm.org/wbuchwalter/tslint-loader/peer-status.svg)](https://david-dm.org/wbuchwalter/tslint-loader?type=peer)
 
-Tslint loader for Webpack.
+Fork of Tslint loader for Webpack. Adds more granular handling of warnings and errors.
 
 ## Installation
 
 ``` shell
-npm install tslint tslint-loader --save-dev
+npm install tslint github:gunn4r/tslint-loader --save-dev
 ```
 
 The package depends on Tslint 4.0+, no longer works with 3.* versions.
