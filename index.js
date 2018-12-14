@@ -69,17 +69,44 @@ function lint(webpackInstance, input, options) {
   var linter = new Lint.Linter(lintOptions, program);
   linter.lint(webpackInstance.resourcePath, input, options.configuration);
   var result = linter.getResult();
-  var emitter = options.emitErrors ? webpackInstance.emitError : webpackInstance.emitWarning;
 
-  report(result, emitter, options.failOnHint, options.fileOutput, webpackInstance.resourcePath,  bailEnabled);
+  report(
+    result,
+    webpackInstance.emitError,
+    webpackInstance.emitWarning,
+    options.failOnErrors,
+    options.failOnWarnings,
+    options.failOnHint,
+    options.fileOutput,
+    webpackInstance.resourcePath,
+    bailEnabled
+  );
 }
 
-function report(result, emitter, failOnHint, fileOutputOpts, filename, bailEnabled) {
-  if (result.failureCount === 0) return;
+function report(result,
+  errorEmitter,
+  warningEmitter,
+  failOnErrors,
+  failOnWarnings,
+  failOnHint,
+  fileOutputOpts,
+  filename,
+  bailEnabled
+) {
+  if (result.errorCount === 0 && result.warningCount === 0) return;
   if (result.failures && result.failures.length === 0) return;
+
   var err = new Error(result.output);
   delete err.stack;
-  emitter(err);
+
+  if (
+    (result.errorCount > 0 && failOnErrors) ||
+    (result.warningCount > 0 && failOnWarnings)
+  ) {
+    errorEmitter(err);
+  } else {
+    warningEmitter(err);
+  }
 
   if (fileOutputOpts && fileOutputOpts.dir) {
     writeToFile(fileOutputOpts, result);
