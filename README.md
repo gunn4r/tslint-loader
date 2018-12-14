@@ -104,9 +104,11 @@ module.exports = {
     // 'tslint-custom.json'
     configFile: false,
     
-    // tslint errors are displayed by default as warnings
-    // set emitErrors to true to display them as errors
-    emitErrors: false,
+    // Fail the build on any lint errors.
+    failOnErrors: false,
+    
+    // Fail the build on any lint warnings.
+    failOnWarnings: false,
     
     // tslint does not interrupt the compilation by default
     // if you want any file with tslint errors to fail
